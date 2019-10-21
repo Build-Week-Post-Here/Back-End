@@ -15,4 +15,8 @@ server.use(express.json());
 server.use('/api/auth', authRouter);
 server.use('/api/posts', authenticate, postsRouter);
 
+server.get('/', (req, res) => {
+  res.send(`API is running on port: ${process.env.PORT}`)
+})
+
 module.exports = server;
