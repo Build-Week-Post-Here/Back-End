@@ -4,7 +4,7 @@ module.exports = {
   development: {
     client: 'sqlite3',
     connection: {
-      filename: './database/posts.db3'
+      filename: './database/users.db3'
     },
     useNullAsDefault: true,
     migrations: {
@@ -12,13 +12,18 @@ module.exports = {
     },
     seeds: {
       directory: './database/seeds'
+    },
+    pool: {
+      afterCreate: (conn, done) => {
+        conn.run('PRAGMA foreign_keys = ON', done)
+      }
     }
   },
 
   staging: {
     client: 'postgresql',
     connection: {
-      database: 'my_db',
+      database: 'users',
       user: 'username',
       password: 'password'
     },
@@ -34,7 +39,7 @@ module.exports = {
   production: {
     client: 'postgresql',
     connection: {
-      database: 'my_db',
+      database: 'users',
       user: 'username',
       password: 'password'
     },
