@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const bcrypt = require('bcryptjs')
 const generateToken = require('./token-middleware')
-const Users = require('../posts/users-model')
+const Users = require('../users/users-model')
 
 router.post('/register', (req, res) => {
   let { username, password } = req.body // deconstruct user sent in request
