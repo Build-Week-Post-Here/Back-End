@@ -1,4 +1,4 @@
-const db = require('../data/dbConfig.js')
+const db = require('../database/dbConfig.js')
 
 module.exports = {
   findAll,
@@ -10,13 +10,12 @@ module.exports = {
 }
 
 function findAll() {
-  return db('posts').select('id', 'username', '')
+  return db('posts')
 }
 
 function findById(id) {
   return (
     db('posts')
-      // .select('id', 'username')
       .where({ id })
       .first()
   )
@@ -48,7 +47,7 @@ function update(id, changes) {
 }
 
 function remove(id) {
-  return db('species')
+  return db('posts')
     .where({ id })
     .del()
 }

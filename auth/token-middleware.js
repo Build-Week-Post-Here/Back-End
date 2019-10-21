@@ -1,4 +1,4 @@
-const secrets = require('../config/secrets')
+
 const jwt = require('jsonwebtoken')
 
 function generateToken(user) {
@@ -11,7 +11,7 @@ function generateToken(user) {
     expiresIn: '1h'
   }
 
-  return jwt.sign(payload, secrets.jwtSecret, options)
+  return jwt.sign(payload, process.env.JWT_SECRET, options)
 }
 
 module.exports = generateToken

@@ -6,6 +6,7 @@ exports.up = function(knex) {
       .notNullable()
       .unique()
     tbl.string('password', 255).notNullable()
+    tbl.string('profile_img')
   })
 }
 
