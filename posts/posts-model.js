@@ -9,8 +9,10 @@ module.exports = {
   remove
 }
 
-function findAll() {
+function findAll(id) {
   return db('posts')
+    .join('users as u', 'u.id', 'posts.user_id')
+    .where('u.id', id)
 }
 
 function findById(id) {
