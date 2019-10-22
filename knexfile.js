@@ -1,11 +1,3 @@
-const localPgConnection = {
-  host: 'localhost',
-  database: 'ranker',
-  user: 'username',
-  password: 'password'
-}
-
-const dbConnection = process.env.DATABASE_URL || localPgConnection
 
 module.exports = {
   development: {
@@ -29,7 +21,11 @@ module.exports = {
 
   production: {
     client: 'postgresql',
-    connection: dbConnection,
+    connection: {
+      database: 'ranker',
+      user: 'username',
+      password: 'password'
+    },
     pool: {
       min: 2,
       max: 10
@@ -42,6 +38,7 @@ module.exports = {
       directory: './database/seeds'
     }
   },
+
   testing: {
     client: 'sqlite3',
     connection: {
