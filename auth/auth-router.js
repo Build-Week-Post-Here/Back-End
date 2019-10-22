@@ -4,10 +4,10 @@ const generateToken = require('./token-middleware')
 const Users = require('../users/users-model')
 
 router.post('/register', (req, res) => {
-  let { username, password } = req.body // deconstruct user sent in request
+  let { email, password } = req.body // deconstruct user sent in request
 
   // checks if username is already taken
-  Users.findBy({ username }).then((newUser) => {
+  Users.findBy({ email }).then((newUser) => {
     if (newUser) {
       res.status(401).json({ message: 'username is already taken' })
     }
@@ -17,7 +17,7 @@ router.post('/register', (req, res) => {
   password = hash // set hased password as the password
 
   // add the new user to database
-  Users.add({ username, password })
+  Users.add({ email, password })
     .then((saved) => {
       res.status(201).json(saved) // send back the saved user
     })
@@ -27,9 +27,9 @@ router.post('/register', (req, res) => {
 })
 
 router.post('/login', (req, res) => {
-  let { username, password } = req.body // capture username, pass from request
+  let { email, password } = req.body // capture username, pass from request
 
-  Users.findBy({ username })
+  Users.findBy({ email })
     .first()
     .then((user) => {
       if (user && bcrypt.compareSync(password, user.password)) {
@@ -37,7 +37,7 @@ router.post('/login', (req, res) => {
         const token = generateToken(user)
         // add token to response
         res.status(200).json({
-          message: `Welcome ${user.username}`,
+          message: `Welcome ${user.email}`,
           token
         })
       } else {
