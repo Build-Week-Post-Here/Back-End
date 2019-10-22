@@ -14,11 +14,9 @@ function findAll() {
 }
 
 function findById(id) {
-  return (
-    db('posts')
-      .where({ id })
-      .first()
-  )
+  return db('posts')
+    .where({ id })
+    .first()
 }
 
 function findBy(filter) {
