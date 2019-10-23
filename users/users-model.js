@@ -3,17 +3,16 @@ const db = require('../database/dbConfig')
 module.exports = {
   find,
   findBy,
-  findById,
+  findUserById,
   add
 }
 
 function find() {
-  return db('users').select('id', 'username')
+  return db('users').select('id', 'email')
 }
 
-function findById(id) {
+function findUserById(id) {
   return db('users')
-    // .select('id', 'username')
     .where({ id })
     .first()
 }
@@ -25,5 +24,8 @@ function findBy(filter) {
 }
 async function add(user) {
   const [id] = await db('users').insert(user)
-  return findById(id)
+  return db('users')
+    .select('id', 'email')
+    .where({ id })
+    .first()
 }
