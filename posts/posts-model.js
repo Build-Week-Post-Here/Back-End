@@ -1,21 +1,31 @@
 const db = require('../database/dbConfig.js')
 
 module.exports = {
-  findAll,
-  findById,
+  findAllPosts,
+  findPostById,
   findBy,
   add,
   update,
   remove
 }
 
-function findAll(id) {
-  return db('posts')
-    .join('users as u', 'u.id', 'posts.user_id')
+function findAllPosts(id) {
+  return db('posts as p')
+    .join('users as u', 'u.id', 'p.user_id')
+    .select(
+      'p.id',
+      'p.title',
+      'p.content',
+      'p.created_at',
+      'p.updated_at',
+      'p.tags',
+      'p.post_img',
+      'p.user_id'
+    )
     .where('u.id', id)
 }
 
-function findById(id) {
+function findPostById(id) {
   return db('posts')
     .where({ id })
     .first()
@@ -35,15 +45,13 @@ async function add(post) {
     .first()
 }
 
-function update(id, changes) {
-  return db('posts')
+async function update(id, changes) {
+  await db('posts')
     .where({ id })
     .update(changes)
-    .then((id) => {
-      return db('posts')
-        .where({ id })
-        .first()
-    })
+  return db('posts')
+    .where({ id })
+    .first()
 }
 
 function remove(id) {
