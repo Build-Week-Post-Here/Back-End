@@ -18,8 +18,11 @@ router.post('/register', (req, res) => {
 
   // add the new user to database
   Users.add({ email, password })
-    .then((saved) => {
-      res.status(201).json(saved) // send back the saved user
+    .then((user) => {
+      // possibility to generate token in register route
+      // const token = generateToken(user)
+      // res.status(201).json({user, token})
+      res.status(201).json(user) // send back the saved user
     })
     .catch((err) => {
       res.status(500).json({ message: 'cannot add the user', err })
@@ -35,9 +38,10 @@ router.post('/login', (req, res) => {
       if (user && bcrypt.compareSync(password, user.password)) {
         // generate a token
         const token = generateToken(user)
-        // add token to response
+        // add token and user(w/o password) to response
         res.status(200).json({
           message: `Welcome ${user.email}`,
+          user: {id: user.id, email: user.email, profile_img: user.profile_img},
           token
         })
       } else {
