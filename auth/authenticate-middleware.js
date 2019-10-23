@@ -11,7 +11,7 @@ module.exports = (req, res, next) => {
       } else {
         // token is good, set username (and/or other props) to request object
         req.user = {
-          username: decodedToken.username
+          email: decodedToken.email
         }
         next()
       }
