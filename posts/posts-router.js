@@ -1,8 +1,7 @@
-// const axios = require('axios')
-
 const router = require('express').Router()
 const Posts = require('./posts-model')
 const Users = require('../users/users-model')
+const Recs = require('../recs/recs-model')
 
 // GET /api/posts/:userid/posts - get a specific users posts
 router.get('/:userid/user', (req, res) => {
@@ -30,24 +29,33 @@ router.get('/:postid', (req, res) => {
 
 // POST /api/posts/:userid - save a users new post
 router.post('/:userid', (req, res) => {
-  const post = req.body
-  // setting param id as post's user_id
-  post.user_id = req.params.userid
+  const entry = req.body
   const { userid } = req.params
+  // setting param id as post's user_id
+  entry.post.user_id = userid
 
   Users.findUserById(userid)
     .then(user => {
-      // checks if current user exists
-      if (user) {
-        Posts.add(post, userid)
+      if (user) { // checks if current user exists
+        Posts.add(entry, userid)
           .then(post => {
-            res.status(201).json(post)
+            console.log('ROUTER saved post: ', post)
+            // setting newly created post id as rec's post_id
+            entry.rec1.post_id = post.id
+            entry.rec2.post_id = post.id
+            entry.rec3.post_id = post.id
+            entry.rec4.post_id = post.id
+            entry.rec5.post_id = post.id
+
+            Recs.saveRecs(entry)
+              .then(recs => res.status(201).json(recs))
+              .catch(err =>res.status(401).json({message: "error saving recs"}))
           })
-          .catch(err => {
-            res.status(500).json({ message: 'Failed to save new post'})
-          })
+          .catch(err => res.status(401).json({ message: "error saving post" }))
       }
+
     })
+    .catch(err => res.status(500).json({ message: 'Failed to save new post'}))
 
 })
 
@@ -84,17 +92,5 @@ router.delete('/:postid', (req, res) => {
       res.status(500).json({ message: 'Failed to delete post' })
     })
 })
-
-// const requestOptions = {
-//   headers: { accept: 'application/json' }
-// }
-// axios
-//   .get('https://icanhazdadjoke.com/search', requestOptions)
-//   .then(response => {
-//     res.status(200).json(response.data.results);
-//   })
-//   .catch(err => {
-//     res.status(500).json({ message: 'Error Fetching Jokes', error: err });
-//   });
 
 module.exports = router
