@@ -2,7 +2,8 @@ const db = require('../database/dbConfig')
 
 module.exports = {
   findRecsByPostId,
-  saveRecs
+  saveRecs,
+  updateRecs
 }
 
 function findRecsByPostId(id) {
@@ -21,4 +22,25 @@ async function saveRecs(entry) {
     ,entry.rec5
   )
   return db('recs').where('post_id', entry.post.user_id )
+}
+
+async function updateRecs(changes, postid) {
+  await db('recs')
+    .where(changes.rec1.id, 'id')
+    .update(changes.rec1)
+  await db('recs')
+    .where(changes.rec2.id, 'id')
+    .update(changes.rec2)
+  await db('recs')
+    .where(changes.rec3.id, 'id')
+    .update(changes.rec3)
+  await db('recs')
+    .where(changes.rec4.id, 'id')
+    .update(changes.rec4)
+  await db('recs')
+    .where(changes.rec5.id, 'id')
+    .update(changes.rec5)
+
+  return db('recs')
+    .where(changes.rec1.post_id, postid)
 }
