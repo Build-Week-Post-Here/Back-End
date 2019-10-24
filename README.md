@@ -8,7 +8,7 @@ request body example:
 
 ```js
 {
-  "email": "grandma@mail.com",
+  "email": "shaq@mail.com",
   "password": "pass123"
 }
 ```
@@ -18,7 +18,7 @@ response boy example:
 ```js
 {
   "id": 12,
-  "email": "grandma@mail.com"
+  "email": "shaq@mail.com"
 }
 ```
 
@@ -30,7 +30,7 @@ request body example:
 
 ```js
 {
-  "email": "shaq@me.com",
+  "email": "grandma@mail.com",
   "password": "pass123"
 }
 ```
@@ -99,7 +99,7 @@ response example:
 }
 ```
 
-## Create new post with user id:
+## Save a new post and recommendations with the user's id:
 
 > POST https://reddit-ranker.herokuapp.com/api/posts/:userid
 
@@ -107,24 +107,68 @@ request body example:
 
 ```js
 {
-	"title": "wild cowboy",
-	"content": "boots, spurs and lassos"
+  "post": {
+    "title": "I lost my job at the bank my very first day",
+    "content": "A woman asked me to check her balance so I pushed her over"
+  },
+  "rec1": {
+    "subreddit": "IAmA",
+    "score": 87
+  },
+  "rec2": {
+    "subreddit": "dadjokes",
+    "score": 34
+  },
+  "rec3": {
+    "subreddit": "AskReddit",
+    "score": 17
+  },
+  "rec4": {
+    "subreddit": "ShowerThoughts",
+    "score": 23
+  },
+  "rec5": {
+    "subreddit": "unpopularopinion",
+    "score": 56
+  }
 }
 ```
 
 response body example:
 
 ```js
-{
-  "id": 9,
-  "title": "wild cowboy",
-  "content": "boots, spurs and lassos",
-  "created_at": "2019-10-23 05:06:57",
-  "updated_at": "2019-10-23 05:06:57",
-  "tags": null,
-  "post_img": null,
-  "user_id": 7
-}
+[
+  {
+    id: 6,
+    subreddit: 'AskReddit',
+    score: 89,
+    post_id: 2
+  },
+  {
+    id: 7,
+    subreddit: 'dadjokes',
+    score: 75,
+    post_id: 2
+  },
+  {
+    id: 8,
+    subreddit: 'Cringetopia',
+    score: 3,
+    post_id: 2
+  },
+  {
+    id: 9,
+    subreddit: 'askscience',
+    score: 9,
+    post_id: 2
+  },
+  {
+    id: 10,
+    subreddit: 'yesyesyesnoyes',
+    score: 18,
+    post_id: 2
+  }
+]
 ```
 
 ## Update a users post:
@@ -134,10 +178,38 @@ response body example:
 request body example:
 
 ```js
-{
-	"title": "wild cowboy",
-	"content": "boots, spurs and lassos"
-}
+[
+  {
+    id: 6,
+    subreddit: 'AskReddit',
+    score: 89,
+    post_id: 2
+  },
+  {
+    id: 7,
+    subreddit: 'dadjokes',
+    score: 75,
+    post_id: 2
+  },
+  {
+    id: 8,
+    subreddit: 'Cringetopia',
+    score: 3,
+    post_id: 2
+  },
+  {
+    id: 9,
+    subreddit: 'askscience',
+    score: 9,
+    post_id: 2
+  },
+  {
+    id: 10,
+    subreddit: 'yesyesyesnoyes',
+    score: 18,
+    post_id: 2
+  }
+]
 ```
 
 response body example:
