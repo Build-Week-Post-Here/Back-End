@@ -24,7 +24,7 @@ exports.seed = function(knex) {
         {subreddit: 'AmITheAsshole', score: 50, post_id: 4},
         {subreddit: 'AskReddit', score: 20, post_id: 4},
         {subreddit: 'midfulness', score: 79, post_id: 4},
-        {subreddit: 'Jokes', score: 9, post_id: 4}
+        {subreddit: 'Jokes', score: 9, post_id: 4},
         {subreddit: 'absolutelynotmeirl', score: 16, post_id: 5},
         {subreddit: 'lifeprotips', score: 50, post_id: 5},
         {subreddit: 'socialskills', score: 20, post_id: 5},
