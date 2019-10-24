@@ -45,7 +45,7 @@ async function add(entry) {
     .first()
 }
 
-async function update(id, changes) {
+async function update(changes, id) {
   await db('posts')
     .where({ id })
     .update(changes)
