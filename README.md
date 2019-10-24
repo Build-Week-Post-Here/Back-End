@@ -171,7 +171,7 @@ response body example:
 ]
 ```
 
-## Update a users post:
+## Update a post and recommendations with the post id:
 
 > PUT https://reddit-ranker.herokuapp.com/api/posts/:postid
 
@@ -248,9 +248,11 @@ response body example:
 ]
 ```
 
-## Delete a users post:
+## Delete a post and recommendations with the post id:
 
 > DELETE https://reddit-ranker.herokuapp.com/api/posts/:postid
+
+- successful deletion returns 1, unsuccessful deletion returns 0
 
 response body example:
 

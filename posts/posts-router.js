@@ -116,10 +116,12 @@ router.delete('/:postid', (req, res) => {
                 res.status(200).json({ removed: deleted })
               })
               .catch(err => {
-                res.status(400).json({ message: 'Error finding post' })
+                res.status(400).json({ message: 'Error removing post' })
               })
           })
-          .catch(err => res.status(400).json({ message: 'Error finding recs' }))
+          .catch(err => res.status(400).json({ message: 'Error removing recs' }))
+      } else {
+        res.status(400).json({ message: "Error finding post" })
       }
     })
     .catch(err => res.status(500).json({ message: 'Failed to delete post' }))
