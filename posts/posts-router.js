@@ -6,12 +6,23 @@ const Recs = require('../recs/recs-model')
 // GET /api/posts/:userid/posts - get a specific users posts
 router.get('/:userid/user', (req, res) => {
   const { userid } = req.params
-  Posts.findAllPosts(userid)
-    .then(posts => {
-      res.status(200).json(posts)
-    })
-    .catch(err => {
-      res.status(500).json({ message: 'error finding posts' })
+  Users.findUserById(userid)
+    .then(user => {
+      if (!user) {
+        res.status(400).json({ message: "User does not exist" })
+      } else {
+        Posts.findAllPosts(userid)
+          .then(posts => {
+            if (posts.length) {
+              res.status(200).json(posts)
+            } else {
+              res.status(200).json({message: 'User has no posts'})
+            }
+          })
+          .catch(err => {
+            res.status(500).json({ message: 'error finding posts' })
+          })
+      }
     })
 })
 
