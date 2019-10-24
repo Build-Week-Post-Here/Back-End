@@ -37,8 +37,8 @@ function findBy(filter) {
     .first()
 }
 
-async function add(post) {
-  const [id] = await db('posts').insert(post, 'id')
+async function add(entry) {
+  const [id] = await db('posts').insert(entry.post)
 
   return db('posts')
     .where({ id })
