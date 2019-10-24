@@ -7,10 +7,10 @@ const Recs = require('../recs/recs-model')
 router.get('/:userid/user', (req, res) => {
   const { userid } = req.params
   Posts.findAllPosts(userid)
-    .then((posts) => {
+    .then(posts => {
       res.status(200).json(posts)
     })
-    .catch((err) => {
+    .catch(err => {
       res.status(500).json({ message: 'error finding posts' })
     })
 })
@@ -19,10 +19,10 @@ router.get('/:userid/user', (req, res) => {
 router.get('/:postid', (req, res) => {
   const { postid } = req.params
   Posts.findPostById(postid)
-    .then((post) => {
+    .then(post => {
       res.status(200).json(post)
     })
-    .catch((err) => {
+    .catch(err => {
       res.status(500).json({ message: 'error finding post' })
     })
 })
@@ -50,30 +50,38 @@ router.post('/:userid', (req, res) => {
             // adds new post recs
             Recs.saveRecs(entry)
               .then(recs => res.status(201).json(recs))
-              .catch(err =>res.status(401).json({message: "error saving recs"}))
+              .catch(err => {
+                res.status(401).json({ message: 'error saving recs' })
+              })
           })
-          .catch(err => res.status(401).json({ message: "error saving post" }))
+          .catch(err => {
+            res.status(401).json({ message: 'error saving post' })
+          })
       }
     })
-    .catch(err => res.status(500).json({ message: 'Failed to save new post'}))
+    .catch(err => res.status(500).json({ message: 'Failed to save new post' }))
 })
 
 // UPDATE /api/posts/:postid - update a users post
 router.put('/:postid', (req, res) => {
   const changes = req.body
   const { postid } = req.params
-
   // checks if post exists
   Posts.findPostById(postid)
-    .then((post) => {
+    .then(post => {
       if (post) {
         // updates existing post
         Posts.update(changes.post, postid)
-          .then(changes => {
-
+          .then(post => {
+            // updates post recs
             Recs.updateRecs(changes, postid)
-            .then(recs => res.status(200).json(changes))
-            .catch(err =>res.status(401).json({message: "error updating recs"}))
+              .then(recs => res.status(200).json(recs))
+              .catch(err => {
+                res.status(401).json({ message: 'error updating recs' })
+              })
+          })
+          .catch(err => {
+            res.status(401).json({ message: 'error updating post' })
           })
       }
     })
@@ -85,7 +93,7 @@ router.delete('/:postid', (req, res) => {
   const { postid } = req.params
 
   Posts.remove(postid)
-    .then((deleted) => {
+    .then(deleted => {
       if (deleted) {
         res.status(200).json({ removed: deleted })
       } else {

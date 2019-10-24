@@ -178,6 +178,42 @@ response body example:
 request body example:
 
 ```js
+{
+  "post": {
+    "title": "I lost my job at the bank my very first day",
+    "content": "A woman asked me to check her balance so I pushed her over"
+  },
+  "rec1": {
+    "id": 6,
+    "subreddit": "IAmA",
+    "score": 87
+  },
+  "rec2": {
+    "id": 7,
+    "subreddit": "dadjokes",
+    "score": 34
+  },
+  "rec3": {
+    "id": 8,
+    "subreddit": "AskReddit",
+    "score": 17
+  },
+  "rec4": {
+    "id": 9,
+    "subreddit": "ShowerThoughts",
+    "score": 23
+  },
+  "rec5": {
+    "id": 10,
+    "subreddit": "unpopularopinion",
+    "score": 56
+  }
+}
+```
+
+response body example:
+
+```js
 [
   {
     id: 6,
@@ -210,21 +246,6 @@ request body example:
     post_id: 2
   }
 ]
-```
-
-response body example:
-
-```js
-{
-  "id": 7,
-  "title": "wild cowboy",
-  "content": "boots, spurs and lassos",
-  "created_at": "2019-10-22 21:55:47",
-  "updated_at": "2019-10-22 21:55:47",
-  "tags": null,
-  "post_img": null,
-  "user_id": 1
-}
 ```
 
 ## Delete a users post:
