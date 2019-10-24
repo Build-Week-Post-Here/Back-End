@@ -77,11 +77,11 @@ router.put('/:postid', (req, res) => {
             Recs.updateRecs(changes, postid)
               .then(recs => res.status(200).json(recs))
               .catch(err => {
-                res.status(401).json({ message: 'error updating recs' })
+                res.status(400).json({ message: 'error updating recs' })
               })
           })
           .catch(err => {
-            res.status(401).json({ message: 'error updating post' })
+            res.status(400).json({ message: 'error updating post' })
           })
       }
     })
@@ -92,17 +92,26 @@ router.put('/:postid', (req, res) => {
 router.delete('/:postid', (req, res) => {
   const { postid } = req.params
 
-  Posts.remove(postid)
-    .then(deleted => {
-      if (deleted) {
-        res.status(200).json({ removed: deleted })
-      } else {
-        res.status(404).json({ message: 'Could not find post with given id' })
+  // checks if post exists
+  Posts.findPostById(postid)
+    .then(post => {
+      if (post) {
+        // removes recs first
+        Recs.removeRecs(postid)
+          .then(deletedRecs => {
+            // removes post second
+            Posts.remove(postid)
+              .then(deleted => {
+                res.status(200).json({ removed: deleted })
+              })
+              .catch(err => {
+                res.status(400).json({ message: 'Error finding post' })
+              })
+          })
+          .catch(err => res.status(400).json({ message: 'Error finding recs' }))
       }
     })
-    .catch(err => {
-      res.status(500).json({ message: 'Failed to delete post' })
-    })
+    .catch(err => res.status(500).json({ message: 'Failed to delete post' }))
 })
 
 module.exports = router

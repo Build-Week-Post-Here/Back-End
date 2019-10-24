@@ -3,7 +3,8 @@ const db = require('../database/dbConfig')
 module.exports = {
   findRecsByPostId,
   saveRecs,
-  updateRecs
+  updateRecs,
+  removeRecs
 }
 
 function findRecsByPostId(id) {
@@ -15,13 +16,16 @@ function findRecsByPostId(id) {
 
 async function saveRecs(entry) {
   await db('recs').insert(
-    entry.rec1
-    ,entry.rec2
-    ,entry.rec3
-    ,entry.rec4
-    ,entry.rec5
+    entry.rec1,
+    entry.rec2,
+    entry.rec3,
+    entry.rec4,
+    entry.rec5
   )
-  return db('recs').where('post_id', entry.rec1.post_id )
+
+  const res = await db('recs').where('post_id', entry.rec1.post_id)
+  console.log(entry.rec1.post_id, res)
+  return db('recs').where('post_id', entry.rec1.post_id)
 }
 
 async function updateRecs(changes, postid) {
@@ -32,7 +36,7 @@ async function updateRecs(changes, postid) {
     .where('id', changes.rec2.id)
     .update(changes.rec2)
   await db('recs')
-    .where('id',changes.rec3.id)
+    .where('id', changes.rec3.id)
     .update(changes.rec3)
   await db('recs')
     .where('id', changes.rec4.id)
@@ -41,6 +45,11 @@ async function updateRecs(changes, postid) {
     .where('id', changes.rec5.id)
     .update(changes.rec5)
 
+  return db('recs').where('post_id', postid)
+}
+
+function removeRecs(id) {
   return db('recs')
-    .where('post_id', postid)
+    .where('post_id', id)
+    .del()
 }
