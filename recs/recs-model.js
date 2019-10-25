@@ -15,17 +15,10 @@ function findRecsByPostId(id) {
 }
 
 async function saveRecs(entry) {
-  await db('recs').insert(
-    entry.rec1,
-    entry.rec2,
-    entry.rec3,
-    entry.rec4,
-    entry.rec5
-  )
-
-  const res = await db('recs').where('post_id', entry.rec1.post_id)
-  console.log(entry.rec1.post_id, res)
-  return db('recs').where('post_id', entry.rec1.post_id)
+  entry.recs.forEach(async rec => {
+    await db('recs').insert(rec)
+  })
+  return db('recs').where('post_id', entry.recs[0].post_id)
 }
 
 async function updateRecs(changes, postid) {

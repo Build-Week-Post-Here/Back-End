@@ -107,66 +107,58 @@ request body example:
 
 ```js
 {
-  "post": {
-    "title": "I lost my job at the bank my very first day",
-    "content": "A woman asked me to check her balance so I pushed her over"
-  },
-  "rec1": {
-    "subreddit": "IAmA",
-    "score": 87
-  },
-  "rec2": {
-    "subreddit": "dadjokes",
-    "score": 34
-  },
-  "rec3": {
-    "subreddit": "AskReddit",
-    "score": 17
-  },
-  "rec4": {
-    "subreddit": "ShowerThoughts",
-    "score": 23
-  },
-  "rec5": {
-    "subreddit": "unpopularopinion",
-    "score": 56
-  }
+	"post": {
+		"title": "I lost my job at the bank my very first day",
+		"content": "A woman asked me to check her balance so I pushed her over"
+	},
+	"recs": [
+		{
+			"subreddit": "IAmA",
+			"score": 1
+		},
+		{
+			"subreddit": "dadjokes",
+			"score": 2
+		},
+		{
+			"subreddit": "AskReddit",
+			"score": 3
+		},
+		{
+			"subreddit": "ShowerThoughts",
+			"score": 4
+		}
+	]
 }
 ```
 
 response body example:
 
 ```js
-[
+;[
   {
-    id: 6,
-    subreddit: 'AskReddit',
-    score: 89,
-    post_id: 2
+    id: 26,
+    subreddit: 'IAmA',
+    score: 1,
+    post_id: 7
   },
   {
-    id: 7,
+    id: 27,
     subreddit: 'dadjokes',
-    score: 75,
-    post_id: 2
+    score: 2,
+    post_id: 7
   },
   {
-    id: 8,
-    subreddit: 'Cringetopia',
+    id: 28,
+    subreddit: 'AskReddit',
     score: 3,
-    post_id: 2
+    post_id: 7
   },
   {
-    id: 9,
-    subreddit: 'askscience',
-    score: 9,
-    post_id: 2
-  },
-  {
-    id: 10,
-    subreddit: 'yesyesyesnoyes',
-    score: 18,
-    post_id: 2
+    id: 29,
+    subreddit: 'ShowerThoughts',
+    score: 4,
+    post_id: 7
   }
 ]
 ```
@@ -214,7 +206,7 @@ request body example:
 response body example:
 
 ```js
-[
+;[
   {
     id: 6,
     subreddit: 'AskReddit',
