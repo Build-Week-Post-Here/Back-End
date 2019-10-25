@@ -21,23 +21,12 @@ async function saveRecs(entry) {
   return db('recs').where('post_id', entry.recs[0].post_id)
 }
 
-async function updateRecs(changes, postid) {
-  await db('recs')
-    .where('id', changes.rec1.id)
-    .update(changes.rec1)
-  await db('recs')
-    .where('id', changes.rec2.id)
-    .update(changes.rec2)
-  await db('recs')
-    .where('id', changes.rec3.id)
-    .update(changes.rec3)
-  await db('recs')
-    .where('id', changes.rec4.id)
-    .update(changes.rec4)
-  await db('recs')
-    .where('id', changes.rec5.id)
-    .update(changes.rec5)
-
+async function updateRecs(recs, postid) {
+  recs.forEach(async rec => {
+    await db('recs')
+      .where('id', rec.id)
+      .update(rec)
+  })
   return db('recs').where('post_id', postid)
 }
 

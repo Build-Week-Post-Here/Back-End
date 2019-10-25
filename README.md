@@ -175,31 +175,33 @@ request body example:
     "title": "I lost my job at the bank my very first day",
     "content": "A woman asked me to check her balance so I pushed her over"
   },
-  "rec1": {
-    "id": 6,
-    "subreddit": "IAmA",
-    "score": 87
-  },
-  "rec2": {
-    "id": 7,
-    "subreddit": "dadjokes",
-    "score": 34
-  },
-  "rec3": {
-    "id": 8,
-    "subreddit": "AskReddit",
-    "score": 17
-  },
-  "rec4": {
-    "id": 9,
-    "subreddit": "ShowerThoughts",
-    "score": 23
-  },
-  "rec5": {
-    "id": 10,
-    "subreddit": "unpopularopinion",
-    "score": 56
-  }
+  "recs": [
+		{
+			"id": 6,
+			"subreddit": "unpopularopinion",
+			"score": 1
+		},
+		{
+			"id": 7,
+			"subreddit": "dadjokes",
+			"score": 2
+		},
+		{
+			"id": 8,
+			"subreddit": "AskReddit",
+			"score": 3
+		},
+		{
+			"id": 9,
+			"subreddit": "ShowerThoughts",
+			"score": 4
+		},
+		{
+			"id": 10,
+			"subreddit": "TIFU",
+			"score": 5
+		}
+	]
 }
 ```
 

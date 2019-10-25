@@ -83,7 +83,7 @@ router.put('/:postid', (req, res) => {
         Posts.update(changes.post, postid)
           .then(post => {
             // updates post recs
-            Recs.updateRecs(changes, postid)
+            Recs.updateRecs(changes.recs, postid)
               .then(recs => res.status(200).json(recs))
               .catch(err => {
                 res.status(400).json({ message: 'error updating recs' })
