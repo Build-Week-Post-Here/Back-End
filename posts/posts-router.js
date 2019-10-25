@@ -8,20 +8,21 @@ router.get('/:userid/user', (req, res) => {
   const { userid } = req.params
   Users.findUserById(userid)
     .then(user => {
-      if (!user) {
-        res.status(400).json({ message: "User does not exist" })
-      } else {
+      if (user) {
         Posts.findAllPosts(userid)
           .then(posts => {
-            if (posts.length) {
-              res.status(200).json(posts)
+            if (posts.length === 0) {
+              res.status(200).json([])
             } else {
-              res.status(200).json({message: 'User has no posts'})
+              res.status(200).json(posts)
+            //   res.status(200).json({message: 'User has no posts'})
             }
           })
           .catch(err => {
             res.status(500).json({ message: 'error finding posts' })
           })
+      } else {
+        res.status(400).json({ message: "User does not exist" })
       }
     })
 })
