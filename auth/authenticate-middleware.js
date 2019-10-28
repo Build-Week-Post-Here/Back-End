@@ -1,4 +1,5 @@
 // check if user is logged in before granting access to next middleware/route handler
+require('dotenv').config()
 const jwt = require('jsonwebtoken')
 
 module.exports = (req, res, next) => {
