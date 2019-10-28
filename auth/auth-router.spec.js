@@ -1,12 +1,12 @@
 const request = require('supertest')
 const server = require('../api/server')
 const db = require('../database/dbConfig')
-// const Users = require('../users/users-model')
 
 describe('POST /api/auth/register', () => {
-
+  afterAll(async () => {
+    await db('users').truncate()
+  })
   beforeEach(async () => {
-    jest.useFakeTimers()
     await db('users').truncate()
   })
 
@@ -33,6 +33,15 @@ describe('POST /api/auth/register', () => {
 })
 
 describe('POST /api/auth/login', () => {
+  afterAll(async () => {
+    await db('users').truncate()
+  })
+  beforeEach(async () => {
+    await db('users').truncate()
+    await request(server)
+      .post('/api/auth/register')
+      .send({ email: 'user1', password: 'pass' })
+  })
 
   it('should allow a registered user to log in', async () => {
     const response = await request(server)
