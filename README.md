@@ -180,32 +180,32 @@ request body example:
     "content": "A woman asked me to check her balance so I pushed her over"
   },
   "recs": [
-		{
-			"id": 6,
-			"subreddit": "unpopularopinion",
-			"score": 1
-		},
-		{
-			"id": 7,
-			"subreddit": "dadjokes",
-			"score": 2
-		},
-		{
-			"id": 8,
-			"subreddit": "AskReddit",
-			"score": 3
-		},
-		{
-			"id": 9,
-			"subreddit": "ShowerThoughts",
-			"score": 4
-		},
-		{
-			"id": 10,
-			"subreddit": "TIFU",
-			"score": 5
-		}
-	]
+    {
+      "id": 6,
+      "subreddit": "unpopularopinion",
+      "score": 1
+    },
+    {
+      "id": 7,
+      "subreddit": "dadjokes",
+      "score": 2
+    },
+    {
+      "id": 8,
+      "subreddit": "AskReddit",
+      "score": 3
+    },
+    {
+      "id": 9,
+      "subreddit": "ShowerThoughts",
+      "score": 4
+    },
+    {
+      "id": 10,
+      "subreddit": "TIFU",
+      "score": 5
+    }
+  ]
 }
 ```
 
