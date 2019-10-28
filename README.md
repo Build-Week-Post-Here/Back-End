@@ -107,28 +107,32 @@ request body example:
 
 ```js
 {
-	"post": {
-		"title": "I lost my job at the bank my very first day",
-		"content": "A woman asked me to check her balance so I pushed her over"
-	},
-	"recs": [
-		{
-			"subreddit": "IAmA",
-			"score": 1
-		},
-		{
-			"subreddit": "dadjokes",
-			"score": 2
-		},
-		{
-			"subreddit": "AskReddit",
-			"score": 3
-		},
-		{
-			"subreddit": "ShowerThoughts",
-			"score": 4
-		}
-	]
+  "post": {
+    "title": "I lost my job at the bank my very first day",
+    "content": "A woman asked me to check her balance so I pushed her over"
+  },
+  "recs": [
+    {
+      "subreddit": "IAmA",
+      "score": 1
+    },
+    {
+      "subreddit": "dadjokes",
+      "score": 2
+    },
+    {
+      "subreddit": "AskReddit",
+      "score": 3
+    },
+    {
+      "subreddit": "ShowerThoughts",
+      "score": 4
+    },
+    {
+      "subreddit": "relationship_advice",
+      "score": 4
+    }
+  ]
 }
 ```
 
