@@ -7,11 +7,11 @@ router.post('/register', (req, res) => {
   let { email, password } = req.body // deconstruct user sent in request
 
   // checks if username is already taken
-  Users.findBy({ email }).then((newUser) => {
-    if (newUser) {
-      res.status(401).json({ message: 'username is already taken' })
-    }
-  })
+  // Users.findBy({ email }).then((newUser) => {
+  //   if (newUser) {
+  //     res.status(401).json({ message: 'username is already taken' })
+  //   }
+  // })
 
   const hash = bcrypt.hashSync(password, 10) // hash the password
   password = hash // set hased password as the password
