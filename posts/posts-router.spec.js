@@ -19,7 +19,6 @@ describe('GET /api/posts/:userid/user', () => {
     const login = await request(server)
       .post('/api/auth/login')
       .send({ email: 'user1', password: 'pass' })
-
     const posts = await request(server)
       .get(`/api/posts/${login.body.user.id}/user`)
       .set('Authorization', login.body.token)

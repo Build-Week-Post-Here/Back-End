@@ -11,12 +11,7 @@ router.get('/:userid/user', (req, res) => {
       if (user) {
         Posts.findAllPosts(userid)
           .then(posts => {
-            if (posts.length === 0) {
-              res.status(200).json([])
-            } else {
-              res.status(200).json(posts)
-            //   res.status(200).json({message: 'User has no posts'})
-            }
+            res.status(200).json(posts)
           })
           .catch(err => {
             res.status(500).json({ message: 'error finding posts' })
